@@ -8,6 +8,6 @@ const router = express.Router();
  router.post('/login',usercontroller.login); // to login
 // router.post('/shorten',usercontroller.shorten); // to shorten
 //  router.post('/newshorturl',usercontroller.shortUrlRender); // to renderUrl
-//  router.get('/logout',usercontroller.logout); // to logout
+ router.get('/logout',usercontroller.logout); // to logout
 
 module.exports=router;

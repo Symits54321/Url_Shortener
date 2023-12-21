@@ -75,7 +75,7 @@ module.exports.registration = async function (req, res) {
 module.exports.login = async function (req, res) {
 
     try {
-
+            // checking user in db
             let user = await userModel.find({
                 username:req.query.username,
                 password:req.query.password
@@ -83,7 +83,7 @@ module.exports.login = async function (req, res) {
 
 
     // if registered
-     if (user){
+     if (user.length>0){
         //setting cookie
         res.cookie('urlshortener_user_id',user._id);
 
@@ -122,7 +122,43 @@ module.exports.login = async function (req, res) {
 // logout
 module.exports.logout = async function (req, res) {
 
-    try
+    try {
+       // res.cookie('urlshortener_user_id',user._id);
+      if(req.cookies.urlshortener_user_id){
+
+           await res.clearCookie('urlshortener_user_id');
+
+                return res.status(200).json({
+
+                    message: 'logout successfull',
+                   
+                
+                }); 
+
+
+      }else{
+
+        return res.status(500).json({
+
+            message: 'logout unsuccessfull because you didnot logged in',
+            
+        }); 
+
+      }  
+       
+    } catch (error) {
+
+        console.error('Error in logot:', error);
+        res.status(500).json({
+
+          message: 'logout Unsuccesfull / error / not (register / login)',
+       
+          advice:'please (register / login) / use the correct url, example given below',
+       
+          error:error
+      }); 
+        
+    }
 
 }
 
