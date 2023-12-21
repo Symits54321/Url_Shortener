@@ -17,13 +17,18 @@ module.exports.registration = async function (req, res) {
             password:req.query.password
         }); 
          
-        
-        return res.status(200).json({
+    if(newUser){
 
-            message: 'registration succesfull'
-           
-          });
+            return res.status(200).json({
 
+                        message: 'registration succesfull',
+                        data:newUser
+                    
+                    });
+
+
+        }
+       
 
     }catch (error) {
 
