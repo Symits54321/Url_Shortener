@@ -3,7 +3,7 @@ const router = express.Router();
 
 
 
- router.use('/',require('./api/v1/index'));
+ router.use('/user',require('./user'));
  
 
 

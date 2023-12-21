@@ -12,7 +12,7 @@ const app = express();
 const path = require('path');
 
 //body parser
-const bodyparser = require('body-parser');
+const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
