@@ -7,6 +7,7 @@ const express = require('express');
 const app = express();
 
 //db (database)
+const db = require('./config/mongoose');
 
 // path requiring
 const path = require('path');

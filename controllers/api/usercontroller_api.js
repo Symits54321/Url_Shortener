@@ -10,7 +10,14 @@ module.exports.registration = async function (req, res) {
 
   
     try {
+
+        //create
+        let newUser = await userModel.create({
+            username:req.query.username,
+            password:req.query.password
+        }); 
          
+        
         return res.status(200).json({
 
             message: 'registration succesfull'
