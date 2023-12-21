@@ -6,6 +6,10 @@ const express = require('express');
 
 const app = express();
 
+//cookie-parser
+var cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
 //db (database)
 const db = require('./config/mongoose');
 

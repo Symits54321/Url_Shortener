@@ -83,7 +83,10 @@ module.exports.login = async function (req, res) {
 
 
     // if registered
-     if (user.username){
+     if (user){
+        //setting cookie
+        res.cookie('urlshortener_user_id',user._id);
+
             return res.status(200).json({
 
                 message: 'login successfull',
@@ -99,6 +102,7 @@ module.exports.login = async function (req, res) {
                 
             }); 
         }
+
         
     } catch (error) {
 
@@ -114,3 +118,11 @@ module.exports.login = async function (req, res) {
     }
 
 }
+
+// logout
+module.exports.logout = async function (req, res) {
+
+    try
+
+}
+
