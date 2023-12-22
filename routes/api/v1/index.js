@@ -5,7 +5,7 @@ const router = express.Router();
 
  router.use('/user',require('./user'));
  router.use('/shorten',require('./shorten'));
- router.use('/shorturl',require('./shorturl'));
+ router.use('/useurl',require('./useurl'));
  
 
 
