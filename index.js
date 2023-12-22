@@ -3,8 +3,48 @@ const dotenv = require('dotenv').config()
 const port = 9000;
 
 const express = require('express');
-
+const session = require('express-session');
 const app = express();
+const passport = require('passport');
+const passportLocal = require('./config/passport-local-strategy');
+
+
+//session
+const MongoStore = require('connect-mongodb-session')(session);
+
+
+app.use(session({
+    name: 'urlshortener',
+    // TODO change the secret before deployment in production mode
+    secret: 'blahsomething',
+    saveUninitialized: false,
+    resave: false,
+    cookie: {
+        maxAge: (1000 * 60 * 100)
+    },
+    store: new MongoStore(
+        {
+            uri: 'mongodb://127.0.0.1:27017/myUrlShortenerAPIdb',
+            autoRemove: 'disabled'
+  
+        },
+        function (err) {
+            console.log(err || 'connect-mongodb setup ok');
+        }
+    )
+  }));
+    
+
+// passport
+
+
+
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(passport.setAuthenticatedUser);
+
 
 //cookie-parser
 var cookieParser = require('cookie-parser');

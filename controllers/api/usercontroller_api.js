@@ -71,26 +71,33 @@ module.exports.registration = async function (req, res) {
 
 }
 
+
+
+
+
+
+
 // login
 module.exports.login = async function (req, res) {
 
     try {
-            // checking user in db
-            let user = await userModel.find({
-                username:req.query.username,
-                password:req.query.password
-            });
-
+            // // checking user in db
+            // let user = await userModel.find({
+            //     username:req.query.username,
+            //     password:req.query.password
+            // });
+   
 
     // if registered
-     if (user.length>0){
+    //  if (user.length>0){
+    if (req.isAuthenticated()){
         //setting cookie
-        res.cookie('urlshortener_user_id',user._id);
+       // res.cookie('urlshortener_user_id',user._id);
 
             return res.status(200).json({
 
                 message: 'login successfull',
-                data:user
+                
             
             });
 
@@ -119,14 +126,24 @@ module.exports.login = async function (req, res) {
 
 }
 
+
+
+
+
+
+
+
 // logout
 module.exports.logout = async function (req, res) {
 
     try {
        // res.cookie('urlshortener_user_id',user._id);
-      if(req.cookies.urlshortener_user_id){
+       if (req.isAuthenticated()){
+     //if(req.cookies.urlshortener_user_id){
 
-           await res.clearCookie('urlshortener_user_id');
+          // await res.clearCookie('urlshortener_user_id');
+
+           req.logout();
 
                 return res.status(200).json({
 
@@ -153,7 +170,7 @@ module.exports.logout = async function (req, res) {
 
           message: 'logout Unsuccesfull / error / not (register / login)',
        
-          advice:'please (register / login) / use the correct url, example given below',
+          advice:'please (register / login) / use the correct url',
        
           error:error
       }); 
@@ -162,3 +179,18 @@ module.exports.logout = async function (req, res) {
 
 }
 
+
+module.exports.error = async function (req, res) {
+
+    try {
+        return res.status(500).json({
+
+            message: 'Invalid username/password',
+            advice:'please (register / login) / use the correct url'
+            
+        });
+
+    } catch (error) {
+        
+    }
+}
