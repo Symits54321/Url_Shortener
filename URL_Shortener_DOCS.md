@@ -46,17 +46,17 @@ Welcome to Url_Shortener API (use postman to test)
 
                         respose will be :-
 
-                             {
-                                  "message": "registration succesfull",
-                                  "data": {
-                                      "username": "sanjay",
-                                      "password": 12388,
-                                      "_id": "658673fa56fc65aedb20a76e",
-                                      "createdAt": "2023-12-23T05:45:30.870Z",
-                                      "updatedAt": "2023-12-23T05:45:30.870Z",
-                                      "__v": 0
-                                  }
-                              }     
+                           {
+                               "message": "login successfull",
+                               "data": {
+                                   "_id": "658673fa56fc65aedb20a76e",
+                                   "username": "sanjay",
+                                   "password": 12388,
+                                   "createdAt": "2023-12-23T05:45:30.870Z",
+                                   "updatedAt": "2023-12-23T05:45:30.870Z",
+                                   "__v": 0
+                               }
+                           }  
 
 
 
