@@ -17,7 +17,9 @@ module.exports.registration = async function (req, res) {
             password:req.query.password
         });
 
-    if(oldUser){
+    if(oldUser.length>0){
+
+        console.log("already registered ");
 
             return res.status(200).json({
 
@@ -37,6 +39,8 @@ module.exports.registration = async function (req, res) {
          
     if(newUser){
 
+        console.log("registration succesfull");
+
             return res.status(200).json({
 
                         message: 'registration succesfull',
@@ -46,6 +50,8 @@ module.exports.registration = async function (req, res) {
 
 
         }else{
+
+            console.log("registration Unsuccesfull");
 
             return res.status(500).json({
 
@@ -93,6 +99,7 @@ module.exports.login = async function (req, res) {
     if (req.isAuthenticated()){
         //setting cookie
        // res.cookie('urlshortener_user_id',user._id);
+       console.log("login success ");
 
             return res.status(200).json({
 
@@ -102,6 +109,8 @@ module.exports.login = async function (req, res) {
             });
 
         }else{
+            
+            console.log("login failed ");
 
             res.status(500).json({
 
@@ -112,7 +121,7 @@ module.exports.login = async function (req, res) {
 
         
     } catch (error) {
-
+        console.log("login error");
           console.error('Error in login:', error);
           res.status(500).json({
 
@@ -144,7 +153,7 @@ module.exports.logout = async function (req, res) {
           // await res.clearCookie('urlshortener_user_id');
 
            req.logout();
-
+           console.log("logout successfull");
                 return res.status(200).json({
 
                     message: 'logout successfull',
@@ -154,6 +163,7 @@ module.exports.logout = async function (req, res) {
 
 
       }else{
+        console.log("logout unsuccessfull");
 
         return res.status(500).json({
 
@@ -165,15 +175,14 @@ module.exports.logout = async function (req, res) {
        
     } catch (error) {
 
-        console.error('Error in logot:', error);
+        console.error('Error in logout:', error);
+
         res.status(500).json({
 
-          message: 'logout Unsuccesfull / error / not (register / login)',
-       
-          advice:'please (register / login) / use the correct url',
-       
-          error:error
-      }); 
+            message: 'logout Unsuccesfull / error / not (register / login)',      
+            advice:'please (register / login) / use the correct url',     
+            error:error
+        }); 
         
     }
 
@@ -183,6 +192,7 @@ module.exports.logout = async function (req, res) {
 module.exports.error = async function (req, res) {
 
     try {
+        console.log("error message");
         return res.status(500).json({
 
             message: 'Invalid username/password',
@@ -191,6 +201,16 @@ module.exports.error = async function (req, res) {
         });
 
     } catch (error) {
+
+        console.log("error in error message");
+
+        return res.status(500).json({
+
+            message: 'Invalid username/password',
+            advice:'please (register / login) / use the correct url',
+            error:error
+            
+        });
         
     }
 }

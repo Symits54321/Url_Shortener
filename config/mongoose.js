@@ -5,7 +5,7 @@ main().catch(err => console.log("database err"+err));
 async function main(){
  
   //let url = process.env.MONGO_SERVER_URL;
-  let url = 'mongodb://127.0.0.1:27017/myUrlShortenerAPIdb';
+  let url = 'mongodb+srv://sumitsingh3357:61gsxZQxqiFkzOz5@urlshortener-cluster.zonvzku.mongodb.net/?retryWrites=true&w=majority';
    await mongoose.connect(`${url}`);
   }
 
@@ -17,6 +17,6 @@ db.on('error',console.error.bind(console,'error connecting to db'));
  
 // up and running then print the message
 db.once('open',function(){
-  console.log('Succesfully connected to the database');
+  console.log('Succesfully connected to the MONGODB database');
  
 });
