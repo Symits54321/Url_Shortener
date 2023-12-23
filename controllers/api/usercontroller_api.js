@@ -19,7 +19,7 @@ module.exports.registration = async function (req, res) {
          });
  
 
-         if(oldUser){
+         if(oldUser.length>0){
 
             return res.status(200).json({
 
@@ -42,7 +42,7 @@ module.exports.registration = async function (req, res) {
 
     // if registration succesfull 
          
-    if(newUser.length>0){
+    if(newUser){
 
             return res.status(200).json({
 
@@ -98,6 +98,7 @@ module.exports.login = async function (req, res) {
             return res.status(200).json({
 
                 message: 'login successfull',
+                data:req.user
                 
             
             });
@@ -145,13 +146,14 @@ module.exports.logout = async function (req, res) {
           //             req.logout();
 
           req.logout(function(err) {
-            if (err) {
-                 //return next(err); }
-                 res.status(500).json({
 
-                    message: 'logout error '
-                 })}
-            res.redirect('/login');
+                                    if (err) {
+                                        //return next(err); }
+                                        res.status(500).json({
+
+                                            message: 'logout error '
+                                        })}
+               // res.redirect('/user/login');
           });
 
                 return res.status(200).json({
