@@ -1,8 +1,11 @@
 Welcome to Url_Shortener API (use postman to test)
 
 
-
    Description :- This api is used to convert the long urls to shorter ones and these shorter url can be used to go through the long urls. This short urls are easy to remember.
+
+   NOTE (1) :- As this project is deployed on render.com  use "https://urlshortener-kizj.onrender.com/" in place of "http://localhost:9000"
+   
+   NOTE (2) :- Without login you cant shorten but can use your short url any where without logging.
 
    Docs :- 
    
@@ -13,7 +16,7 @@ Welcome to Url_Shortener API (use postman to test)
           Get the shorturl from above :--    GET        EXAMPLE :---- http://localhost:9000/useurl/f82eb0  (USE in Google Chrome,Mozilla firefox )
           
 
-                    
+  Tech Used:-Node.js, Mongo db cloud, Express.js                 
 
   DEMO EXAMPLE :--
   
@@ -115,9 +118,9 @@ Welcome to Url_Shortener API (use postman to test)
                                     }
 
                                   
+Error handling :- Various error such as wrong password username, url error have been taken care and return in json.
 
 
-NOTE :- Without login you cant shorten but can use your short url any where without logging.
 
 
                            
