@@ -81,7 +81,7 @@ Welcome to Url_Shortener API (use postman to test)
                                     },
                                     "longurl": "www.gmail.com",
                                     "hashcode": "f82eb0",
-                                    "shorturl": "localhost:9000/useurl/f82eb0",
+                                    "shorturl": "localhost:9000/useurl/f82eb0",                       // YOUR SHORT URL
                                     "_id": "658675ca56fc65aedb20a775",
                                     "createdAt": "2023-12-23T05:53:14.537Z",
                                     "updatedAt": "2023-12-23T05:53:14.537Z",
