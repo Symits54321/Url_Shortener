@@ -14,8 +14,11 @@ passport.use(new LocalStrategy({
         // find a user and establish the identity
         let user = await User.findOne({ username: username });
         try {
+
+            if (!user) { return done(null, false); }
+
             if (!user || user.password != password) {
-                //console.log('Invalid Username/Password');
+                console.log('Invalid Username/Password');
                 return done(null, false);
             }
          console.log('user is found in passport local strategy')

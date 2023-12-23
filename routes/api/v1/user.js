@@ -7,10 +7,10 @@ const router = express.Router();
 
 
  router.post('/registration',usercontroller.registration); // to register
- router.post('/login',passport.authenticate('local',{failureRedirect: '/error'}),usercontroller.login); // to login
-// router.post('/shorten',usercontroller.shorten); // to shorten
-//  router.post('/newshorturl',usercontroller.shortUrlRender); // to renderUrl
-router.get('/error',usercontroller.error);
+ router.get('/errormsg',usercontroller.errormsg);
+ router.post('/login',passport.authenticate('local',{failureRedirect: '/user/errormsg'}),usercontroller.login); // to login
+
+
  router.get('/logout',usercontroller.logout); // to logout
 
 module.exports=router;

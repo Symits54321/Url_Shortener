@@ -11,15 +11,15 @@ module.exports.registration = async function (req, res) {
   
     try {
         
-        // check if exists
-        let oldUser = await userModel.find({
-            username:req.query.username,
-            password:req.query.password
-        });
+      // check if registration exists
 
-    if(oldUser.length>0){
+         let oldUser = await userModel.find({
+             username:req.query.username,
+             password:req.query.password
+         });
+ 
 
-        console.log("already registered ");
+         if(oldUser){
 
             return res.status(200).json({
 
@@ -27,19 +27,22 @@ module.exports.registration = async function (req, res) {
                         data:oldUser
                     
                     }); 
-             }  
+          }  
 
 
 
-        //create
+        //create new user / register
+
         let newUser = await userModel.create({
             username:req.query.username,
             password:req.query.password
         }); 
-         
-    if(newUser){
 
-        console.log("registration succesfull");
+
+
+    // if registration succesfull 
+         
+    if(newUser.length>0){
 
             return res.status(200).json({
 
@@ -48,15 +51,16 @@ module.exports.registration = async function (req, res) {
                     
                     });
 
+    // if registration unsuccessfull 
 
         }else{
-
-            console.log("registration Unsuccesfull");
 
             return res.status(500).json({
 
                 message: 'registration Unsuccesfull',
-                data:req.query
+                data:req.query,
+                advice:'please use the correct url, example given below',
+                correcturlexample: '/user/registration/?username=abcd&password=12345'
             
             }); 
         }
@@ -87,19 +91,9 @@ module.exports.registration = async function (req, res) {
 module.exports.login = async function (req, res) {
 
     try {
-            // // checking user in db
-            // let user = await userModel.find({
-            //     username:req.query.username,
-            //     password:req.query.password
-            // });
-   
-
-    // if registered
-    //  if (user.length>0){
+         
     if (req.isAuthenticated()){
-        //setting cookie
-       // res.cookie('urlshortener_user_id',user._id);
-       console.log("login success ");
+      
 
             return res.status(200).json({
 
@@ -109,8 +103,6 @@ module.exports.login = async function (req, res) {
             });
 
         }else{
-            
-            console.log("login failed ");
 
             res.status(500).json({
 
@@ -121,7 +113,7 @@ module.exports.login = async function (req, res) {
 
         
     } catch (error) {
-        console.log("login error");
+
           console.error('Error in login:', error);
           res.status(500).json({
 
@@ -146,14 +138,22 @@ module.exports.login = async function (req, res) {
 module.exports.logout = async function (req, res) {
 
     try {
-       // res.cookie('urlshortener_user_id',user._id);
+     
        if (req.isAuthenticated()){
-     //if(req.cookies.urlshortener_user_id){
+    
 
-          // await res.clearCookie('urlshortener_user_id');
+          //             req.logout();
 
-           req.logout();
-           console.log("logout successfull");
+          req.logout(function(err) {
+            if (err) {
+                 //return next(err); }
+                 res.status(500).json({
+
+                    message: 'logout error '
+                 })}
+            res.redirect('/login');
+          });
+
                 return res.status(200).json({
 
                     message: 'logout successfull',
@@ -163,9 +163,8 @@ module.exports.logout = async function (req, res) {
 
 
       }else{
-        console.log("logout unsuccessfull");
 
-        return res.status(500).json({
+        return res.status(200).json({
 
             message: 'logout unsuccessfull because you didnot logged in',
             
@@ -175,42 +174,36 @@ module.exports.logout = async function (req, res) {
        
     } catch (error) {
 
-        console.error('Error in logout:', error);
-
+        console.error('Error in logot:', error);
         res.status(500).json({
 
-            message: 'logout Unsuccesfull / error / not (register / login)',      
-            advice:'please (register / login) / use the correct url',     
-            error:error
-        }); 
+          message: 'logout Unsuccesfull / error / not (register / login)',     
+          advice:'please (register / login) / use the correct url',     
+          error:error
+      }); 
         
     }
 
 }
 
 
-module.exports.error = async function (req, res) {
+
+
+
+// if failed in authentication 
+module.exports.errormsg = async function (req, res) {
 
     try {
-        console.log("error message");
         return res.status(500).json({
 
-            message: 'Invalid username/password',
+            message: 'Invalid Username/Password  /Please LOGIN / REGISTER ',
             advice:'please (register / login) / use the correct url'
             
         });
 
     } catch (error) {
 
-        console.log("error in error message");
-
-        return res.status(500).json({
-
-            message: 'Invalid username/password',
-            advice:'please (register / login) / use the correct url',
-            error:error
-            
-        });
-        
+        console.log("error in error function")
+        console.log(error);
     }
 }
