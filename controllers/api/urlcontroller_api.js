@@ -49,7 +49,8 @@ module.exports.shorten = async function (req, res) {
 
                                             //if (req.cookies && req.cookies.urlshortener_user_id){
                     let userId= req.user._id.toString();
-                    let longurl = await req.params.url;  
+                   // let longurl = await req.params.url;
+                   let longurl = req.originalUrl.replace(/^\/shorten\//, ''); // Access the entire original URL including query parameters  
 
 
 
