@@ -4,8 +4,8 @@ const mongoose = require("mongoose");
 main().catch(err => console.log("database err"+err));
 async function main(){
  
-  //let url = process.env.MONGO_SERVER_URL;
-  let url = 'mongodb+srv://sumitsingh3357:61gsxZQxqiFkzOz5@urlshortener-cluster.zonvzku.mongodb.net/?retryWrites=true&w=majority';
+  let url = process.env.MONGO_SERVER_URL;
+ // let url = '';
    await mongoose.connect(`${url}`);
   }
 

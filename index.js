@@ -24,7 +24,7 @@ app.use(session({
     },
     store: new MongoStore(
         {
-            uri: 'mongodb+srv://sumitsingh3357:61gsxZQxqiFkzOz5@urlshortener-cluster.zonvzku.mongodb.net/?retryWrites=true&w=majority',
+            uri: process.env.MONGO_SERVER_URL,
             autoRemove: 'disabled'
   
         },

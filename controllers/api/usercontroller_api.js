@@ -20,7 +20,7 @@ module.exports.registration = async function (req, res) {
  
 
          if(oldUser.length>0){
-
+            console.log("Old user");
             return res.status(200).json({
 
                         message: 'Already registered, please login',
@@ -43,7 +43,7 @@ module.exports.registration = async function (req, res) {
     // if registration succesfull 
          
     if(newUser){
-
+        console.log("new user registration succesfull");
             return res.status(200).json({
 
                         message: 'registration succesfull',
@@ -94,7 +94,7 @@ module.exports.login = async function (req, res) {
          
     if (req.isAuthenticated()){
       
-
+        console.log("login successfully");
             return res.status(200).json({
 
                 message: 'login successfull',
@@ -104,7 +104,7 @@ module.exports.login = async function (req, res) {
             });
 
         }else{
-
+            console.log("login Unsuccessfull");
             res.status(500).json({
 
                 message: 'login Unsuccesfull , please register',
@@ -143,7 +143,7 @@ module.exports.logout = async function (req, res) {
        if (req.isAuthenticated()){
     
 
-          //             req.logout();
+        
 
           req.logout(function(err) {
 
@@ -156,6 +156,8 @@ module.exports.logout = async function (req, res) {
                // res.redirect('/user/login');
           });
 
+             console.log("logout successfully");
+
                 return res.status(200).json({
 
                     message: 'logout successfull',
@@ -165,7 +167,7 @@ module.exports.logout = async function (req, res) {
 
 
       }else{
-
+        console.log("logout unsuccessfull because you didnot logged in");
         return res.status(200).json({
 
             message: 'logout unsuccessfull because you didnot logged in',
@@ -176,7 +178,7 @@ module.exports.logout = async function (req, res) {
        
     } catch (error) {
 
-        console.error('Error in logot:', error);
+        console.error('Error in logout:', error);
         res.status(500).json({
 
           message: 'logout Unsuccesfull / error / not (register / login)',     
