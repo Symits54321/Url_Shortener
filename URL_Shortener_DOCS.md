@@ -1,4 +1,4 @@
-Welcome to Url_Shortener API (use postman to test)
+Welcome to Url_Shortener API (use postman to test or generate shorturl)
 
 
    Description :- This api is used to convert the long urls to shorter ones and these shorter url can be used to go through the long urls. This short urls are easy to remember.
@@ -9,11 +9,11 @@ Welcome to Url_Shortener API (use postman to test)
 
    Docs :- 
    
-          To Register :--                    POST       /user/registration/?username=<username>&password=<password>
-          To Login :--                       POST       /user/login/?username=<username>&password=<password>
-          To Logout :--                      GET        /user/logout
-          To short your long url :--         GET        /shorten/<longurl>
-          Get the shorturl from above :--    GET        EXAMPLE :---- http://localhost:9000/useurl/f82eb0  (USE in Google Chrome,Mozilla firefox )
+          To Register :--                    POST       /user/registration/?username=<username>&password=<password>    (USE POSTMAN)
+          To Login :--                       POST       /user/login/?username=<username>&password=<password>           (USE POSTMAN)
+          To Logout :--                      GET        /user/logout                                                   (USE POSTMAN)
+          To Generate short url :--          GET        /shorten/<longurl>        (USE POSTMAN)
+          USE the shorturl from above :--    GET        EXAMPLE :---- http://localhost:9000/useurl/f82eb0  (USE in Google Chrome,Mozilla firefox )
           
 
   Tech Used:-Node.js, Mongo db cloud, Express.js                 
