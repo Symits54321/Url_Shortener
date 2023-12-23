@@ -16,7 +16,7 @@ const MongoStore = require('connect-mongodb-session')(session);
 app.use(session({
     name: 'urlshortener',
     // TODO change the secret before deployment in production mode
-    secret: 'blahsomething',
+    secret:process.env.SESSION_SECRET ,
     saveUninitialized: false,
     resave: false,
     cookie: {
