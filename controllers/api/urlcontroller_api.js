@@ -79,7 +79,7 @@ module.exports.shorten = async function (req, res) {
 
                     //adding useurl to ahort url
 
-                    const shorturl = "localhost:9000/useurl/"+hashcode;
+                    const shorturl = "https://urlshortener-kizj.onrender.com//useurl/"+hashcode;
 
                     //save in db
 
