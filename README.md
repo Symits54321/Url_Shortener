@@ -7,6 +7,8 @@ Welcome to Url_Shortener API (use postman to test or generate shorturl)
    
    NOTE (2) :- Without login you cant shorten but can use your short url any where without logging.
 
+   NOTE (3) :- Use the short url in browser.
+
    Docs :- 
    
           To Register :--                    POST       /user/registration/?username=<username>&password=<password>    (USE POSTMAN)
