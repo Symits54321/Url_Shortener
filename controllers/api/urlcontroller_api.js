@@ -159,7 +159,13 @@ module.exports.redirectUrl = async function (req, res) {
             // })
 
             //res.redirect(longurl);
-            res.redirect(`https://${longurl}`);
+            //res.redirect(`https://${longurl}`);
+            if (longurl.startsWith('http://') || longurl.startsWith('https://')) {
+                res.redirect(longurl); // Redirect directly if 'http://' or 'https://' is present
+              } else {
+                // Redirect by adding 'https://' to the URL (defaulting to HTTPS)
+                res.redirect(`https://${longurl}`);
+              }
 
         }else{ 
             //else say no such url present
