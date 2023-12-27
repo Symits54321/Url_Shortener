@@ -135,6 +135,115 @@ module.exports.shorten = async function (req, res) {
 }
 
 
+
+//shorten function manages saving shorturl by own hashcode
+module.exports.customshorten = async function (req, res) {
+   
+             
+    try {
+
+        // check if logged in 
+       
+        if (req.isAuthenticated()){
+
+
+
+                                            //if (req.cookies && req.cookies.urlshortener_user_id){
+                    let userId= req.user._id.toString();
+                   // let longurl = await req.params.url;
+                //    let longurl = req.originalUrl.replace(/^\/shorten\//, ''); // Access the entire original URL including query parameters  
+                
+                  let customhash=req.params.hash;
+                
+                let longurl=req.originalUrl;
+                //longurl = encodeURIComponent(longurl);
+
+              
+
+
+                    
+            //if longurl present in db then return shorturl from db
+
+                    let samelongurl = await shortUrlModel.find({   
+                        longurl:longurl,
+                        hashcode:customhash
+                    });
+                
+                if(samelongurl.length>0){
+
+                    return res.status(200).json({
+
+                        message: 'shorten url already made earlier',
+                        data:samelongurl[0]
+                    
+                    });
+                }
+                
+                    
+
+                    // const hashcode = await longurlshort(longurl);
+                    const hashcode = customhash;
+
+                
+                
+
+                    //adding useurl to ahort url
+
+                    const shorturl = "https://urlshortener-kizj.onrender.com/useurl/"+hashcode;
+
+                    //save in db
+
+                    console.log({
+                        user:userId,
+                        longurl:longurl,
+                        hashcode:hashcode,
+                        shorturl:shorturl
+                    });
+
+                    let newurldata = await shortUrlModel.create({
+                        user:userId,
+                        longurl:longurl,
+                        hashcode:hashcode,
+                        shorturl:shorturl
+
+                    }); 
+
+                    let shorturldata = await newurldata.populate('user'); 
+
+                    return res.status(200).json({
+
+                        message: 'shorten url  succesfull',
+                        data:shorturldata
+                    
+                    });
+
+    // if notlooged then please login
+        }else{
+
+            res.status(200).json({
+
+                message: 'please login',
+                
+            }); 
+        }
+
+        
+
+
+   // shortening error     
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+
+            message: 'please login / shortebyhash error',
+            error:error
+            
+        }); 
+    }
+
+}
+
+
 // redirect shorturl to longurl
 module.exports.redirectUrl = async function (req, res) {
 
