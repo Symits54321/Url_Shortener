@@ -5,11 +5,7 @@ const router = express.Router();
 
 let records = [];
 
-//router.use('/',require('../routes/index'));
-router.get('/', (req, res) => {
-    res.send('App is running..');
-  });
-  
+
 //Get all students
 router.get('/', (req, res) => {
   res.send('App is running..');
