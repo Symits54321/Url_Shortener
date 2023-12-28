@@ -7,9 +7,10 @@ let records = [];
 
 
 //Get all students
-router.get('/', (req, res) => {
-  res.send('App is running..');
-});
+router.use('/',require('../routes/index'));
+// router.get('/', (req, res) => {
+//   res.send('App is running..');
+// });
 
 //Create new record
 router.post('/add', (req, res) => {
@@ -48,5 +49,5 @@ router.get('/demo', (req, res) => {
 });
 
 app.use('/.netlify/functions/api', router);
-app.use('/',require('../routes/index'));
+//app.use('/',require('../routes/index'));
 module.exports.handler = serverless(app);
